@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Internal apps
     'Home.apps.HomeConfig',
+    'accounts_module.apps.AccountsModuleConfig',
+    'Competitions.apps.CompetitionsConfig',
+    'Teams.apps.TeamsConfig',
     # External apps
     'django_render_partial',
 ]
@@ -73,6 +76,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+
+AUTH_USER_MODEL = 'accounts_module.Registration'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
