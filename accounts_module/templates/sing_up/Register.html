@@ -1,0 +1,70 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+	صفحه | ثبت نام
+{% endblock %}
+
+{% block content %}
+    <!-- user account details popup start  -->
+    <div class="user-account-popup p-4">
+        <div class="account-items d-grid gap-1" data-tilt>
+            <div class="user-level-area p-3">
+                <div class="user-info d-between">
+                    <span class="user-name fs-five">لیلا زعفرانی</span>
+                    <div class="badge d-flex align-items-center">
+                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
+                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
+                        <i class="ti ti-medal fs-three fs-normal tcp-2"></i>
+                    </div>
+                </div>
+                <div class="user-level">
+                    <span class="level-title tcn-6">سطح</span>
+                    <div class="level-bar my-1">
+                        <div class="level-progress" style="width: 30%;"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="profile.html" class="account-item">مشاهده نمایه</a>
+            <a href="chat.html" class="account-item">پیام ها</a>
+            <button class="bttn account-item">خروج</button>
+        </div>
+    </div>
+    <!-- user account details popup end  -->
+
+    <!-- sign in section start  -->
+    <section class="sign-in-section pb-120 pt-120 mt-sm-15 mt-10">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="form-area">
+                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">ثبت نام</h1>
+                        <form action="#" class="sign-in-form">
+                            <div class="single-input mb-6">
+                                <input type="text" placeholder="نام خود را وارد کنید">
+                            </div>
+                            <div class="single-input mb-6">
+                                <input type="text" placeholder="نام کاربری خود را وارد کنید">
+                            </div>
+                            <div class="single-input mb-6">
+                                <input type="text" placeholder="شماره موبایل خود را وارد کنید">
+                            </div>
+                            <div class="single-input mb-6">
+                                <input type="email" placeholder="ایمیل خود را وارد کنید">
+                            </div>
+                            <div class="single-input mb-6">
+                                <input type="password" placeholder="کلمه عبور خود را وارد کنید">
+                            </div>
+                            <div class="text-center">
+                                <button class="bttn py-3 px-6 rounded bgp-1">ثبت نام</button>
+                            </div>
+                        </form>
+                        <p class="tcn-4 text-center mt-lg-10 mt-6">از قبل حساب کاربری دارید؟ <a href="signin.html"
+                                class="text-decoration-underline tcp-1">ورود</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

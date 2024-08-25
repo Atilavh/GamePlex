@@ -1,3 +1,5 @@
+{% load static %}
+
 <header class="header-section w-100">
         <div class="py-sm-6 py-3 mx-xxl-20 mx-md-15 mx-3">
             <div class="d-flex align-items-center justify-content-between gap-xxl-10 gap-lg-8 w-100">
@@ -10,53 +12,36 @@
                             <span></span>
                             <span></span>
                         </button>
-                        <a class="navbar-brand d-flex align-items-center gap-4" href="index.html">
-                            <img class="w-100 logo1" src="assets/img/favicon.png" alt="فاوآیکون">
-                            <img class="w-100 logo2" src="assets/img/logo.png" alt="لوگو">
+                        <a class="navbar-brand d-flex align-items-center gap-4" href="{% url 'home_page' %}">
+                            <img class="w-100 logo1" src="{% static 'img/favicon.png' %}" alt="فاوآیکون">
+                            <img class="w-100 logo2" src="{% static 'img/logo.png' %}" alt="لوگو">
                         </a>
                     </div>
                     <div class="navbar-toggle-item w-100 position-lg-relative">
                         <ul class="custom-nav gap-lg-7 gap-3 cursor-scale growDown2 me-xxl-10" data-lenis-prevent>
                             <li class="menu-link">
-                                <a href="index.html">خانه</a>
+                                <a href="{% url 'home_page' %}">خانه</a>
                             </li>
-                            <li class="menu-item">
-                                <button>مسابقات</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="tournaments.html">مسابقات</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="tournaments-details.html">جزئیات مسابقات</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-link">
-                                <a href="game.html">بازی</a>
-                            </li>
-                            <li class="menu-item">
-                                <button>تیم ها</button>
-                                <ul class="sub-menu">
-                                    <li class="menu-link">
-                                        <a href="teams.html">تیم ها</a>
-                                    </li>
-                                    <li class="menu-link">
-                                        <a href="teams-details.html">جزئیات تیم ها</a>
-                                    </li>
-                                </ul>
-                            </li>
+                                <a href="{% url 'competitions_list' %}">مسابقات</a>
+{#                                    <li class="menu-link">#}
+{#                                        <a href="tournaments-details.html">جزئیات مسابقات</a>#}
+{#                                    </li>#}
+                                        <a href="{% url 'team_list' %}">تیم ها</a>
+{#                                    <li class="menu-link">#}
+{#                                        <a href="teams-details.html">جزئیات تیم ها</a>#}
+{#                                    </li>#}
                             <li class="menu-item">
                                 <button>برگه ها</button>
                                 <ul class="sub-menu">
                                     <li class="menu-link">
-                                        <a href="signup.html">ثبت نام</a>
+                                        <a href="{% url 'Register' %}">ثبت نام</a>
                                     </li>
                                     <li class="menu-link">
                                         <a href="signin.html">ورود</a>
                                     </li>
-                                    <li class="menu-link">
-                                        <a href="error.html">خطا</a>
-                                    </li>
+{#                                    <li class="menu-link">#}
+{#                                        <a href="error.html">خطا</a>#}
+{#                                    </li>#}
                                     <li class="menu-link">
                                         <a href="faq.html">سوالات متداول</a>
                                     </li>
@@ -82,7 +67,7 @@
                     <div class="header-profile pointer">
                         <div class="profile-wrapper d-flex align-items-center gap-3">
                             <div class="img-area overflow-hidden">
-                                <img class="w-100" src="assets/img/profile.png" alt="نمایه">
+                                <img class="w-100" src="{% static 'img/profile.png' %}" alt="نمایه">
                             </div>
                             <span class="user-name d-none d-xxl-block text-nowrap">لیلا زعفرانی</span>
                             <i class="ti ti-chevron-down d-none d-xxl-block"></i>
