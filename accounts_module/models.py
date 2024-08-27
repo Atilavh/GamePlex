@@ -11,6 +11,7 @@ class Registration(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=100, verbose_name='شماره همراه', unique=True)
     email = models.EmailField(max_length=100, verbose_name='ایمیل', unique=True)
     email_active_code = models.CharField(max_length=48, verbose_name='کد فعال کننده')
+    is_active = models.BooleanField(verbose_name='فعال / غیرفعال')
 
     class Meta:
         verbose_name = 'کاربر'
