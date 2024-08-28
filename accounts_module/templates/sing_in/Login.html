@@ -11,7 +11,7 @@
                 <div class="col-lg-6">
                     <div class="form-area">
                         <h1 class="tcn-1 text-center cursor-scale growUp mb-10">ورود</h1>
-                        <form action="{% url 'Register' %}" method="post" class="sign-in-form">
+                        <form action="{% url 'Login' %}" method="post" class="sign-in-form">
                             {% csrf_token %}
                             {{ login_form.email.error_messages }}
                             {{ login_form.email }}

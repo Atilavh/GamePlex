@@ -51,6 +51,9 @@
                                 <li class="menu-link">
                                     <a href="terms-condition.html">شرایط و ضوابط</a>
                                 </li>
+                                <li class="menu-link">
+                                    <a href="{% url 'Logout' %}">خروج</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -68,15 +71,19 @@
                     <i class="ti ti-bell-filled"></i>
                 </button>
                 {% if request.user.is_authenticated %}
-                	<div class="header-profile pointer">
-                    <div class="profile-wrapper d-flex align-items-center gap-3">
-                        <div class="img-area overflow-hidden">
-                            <img class="w-100" src="{% static 'img/profile.png' %}" alt="نمایه">
+                    <div class="header-profile pointer">
+                        <div class="profile-wrapper d-flex align-items-center gap-3">
+                            <div class="img-area overflow-hidden">
+                                <img class="w-100"
+                                     src="{% static 'img/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg' %}"
+                                     alt="نمایه">
+                            </div>
+                            {% if request.user.is_authenticated %}
+                                <span class="user-name d-none d-xxl-block text-nowrap">{{ User.full_name }}</span>
+                                <i class="ti ti-chevron-down d-none d-xxl-block"></i>
+                            {% endif %}
                         </div>
-                        <span class="user-name d-none d-xxl-block text-nowrap">{{ user.full_name }}</span>
-                        <i class="ti ti-chevron-down d-none d-xxl-block"></i>
                     </div>
-                </div>
                 {% endif %}
             </div>
         </div>

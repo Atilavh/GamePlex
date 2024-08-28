@@ -19,4 +19,3 @@ class Registration(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.full_name
-
