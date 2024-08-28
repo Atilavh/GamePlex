@@ -1,5 +1,6 @@
 from audioop import reverse
 
+from django.contrib.auth import login, logout
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.crypto import get_random_string
@@ -68,11 +69,31 @@ class ActivateAccountView(View):
         return redirect('home_page')
 
 
-
 def login_page(request):
     Login = login_form(request.POST)
+    if Login.is_valid():
+        user_email = Login.cleaned_data.get('email')
+        user_password = Login.cleaned_data.get('password')
+        user: Registration = Registration.objects.filter(email__iexact=user_email).first()
+        if user is not None:
+            if not user.is_active:
+                Login.add_error('email', 'کاربری با مشخصات وارد شده یافت نشد')
+            else:
+                is_password_correct = user.check_password(user_password)
+                if is_password_correct:
+                    login(request, user)
+                    return redirect('home_page')
+                else:
+                    Login.add_error('password', 'کلمه عبور یا ایمیل اشتباه می باشد')
+    else:
+        Login.add_error('email', 'حساب کاربری شما فعال نشده است')
 
     context = {
         'login_form': Login,
     }
     return render(request, 'sing_in/Login.html', context)
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('Login')
