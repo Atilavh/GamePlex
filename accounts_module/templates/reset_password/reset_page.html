@@ -1,0 +1,26 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+{% block title %}
+    صفحه | ریست پسورد
+{% endblock %}
+{% block content %}
+    <!-- sign in section start  -->
+    <section class="sign-in-section pb-120 pt-120 mt-sm-15 mt-10">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="form-area">
+                        <h1 class="tcn-1 text-center cursor-scale growUp mb-10">عوض کردن رمز عبور</h1>
+                        <form action="{% url 'Reset' %}" method="post" class="sign-in-form">
+                            {% csrf_token %}
+
+                            <div class="text-center">
+                                <button class="bttn py-3 px-6 rounded bgp-1">عوض کردن</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

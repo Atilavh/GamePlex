@@ -22,7 +22,7 @@
                         <li class="menu-link">
                             <a href="{% url 'home_page' %}">خانه</a>
                         </li>
-                        <a href="{% url 'competitions_list' %}">مسابقات</a>
+                        <a href="{% url 'tournament_list' %}">مسابقات</a>
                         {#                                    <li class="menu-link">#}
                         {#                                        <a href="tournaments-details.html">جزئیات مسابقات</a>#}
                         {#                                    </li>#}
@@ -34,8 +34,18 @@
                             <button>برگه ها</button>
                             <ul class="sub-menu">
                                 {% if request.user.is_authenticated %}
+                                    {% if request.user.is_superuser %}
+                                    <li class="menu-link">
+                                        <a href="admin/">پنل ادمین</a>
+                                    </li>
+                                    {% endif %}
+                                {% endif %}
+                                {% if request.user.is_authenticated %}
                                     <li class="menu-link">
                                         <a href="signin.html">پنل کاربری</a>
+                                    </li>
+                                    <li class="menu-link">
+                                        <a href="{% url 'Logout' %}">خروج</a>
                                     </li>
                                 {% else %}
                                     <li class="menu-link">
@@ -45,15 +55,14 @@
                                         <a href="{% url 'Login' %}">ورود</a>
                                     </li>
                                 {% endif %}
+
                                 <li class="menu-link">
                                     <a href="faq.html">سوالات متداول</a>
                                 </li>
                                 <li class="menu-link">
                                     <a href="terms-condition.html">شرایط و ضوابط</a>
                                 </li>
-                                <li class="menu-link">
-                                    <a href="{% url 'Logout' %}">خروج</a>
-                                </li>
+
                             </ul>
                         </li>
                     </ul>

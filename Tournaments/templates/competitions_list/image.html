@@ -1,0 +1,17 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+	سیو عکس
+{% endblock %}
+
+{% block content %}
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<form action="{% url 'image' %}" method="post" class="sign-in-form">
+        {% csrf_token %}
+        {{ image.profile }}
+        <div class="text-center">
+            <button class="bttn py-3 px-6 rounded bgp-1">ثبت</button>
+        </div>
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

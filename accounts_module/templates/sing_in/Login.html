@@ -1,7 +1,7 @@
 {% extends 'shared/_layout.html' %}
 {% load static %}
 {% block title %}
-    ورود
+    صفحه | ورود
 {% endblock %}
 {% block content %}
     <!-- sign in section start  -->
@@ -24,6 +24,11 @@
                         <p class="tcn-4 text-center mt-lg-10 mt-6">حساب کاربری ندارید؟
                             <a href="{% url 'Register' %}" class="text-decoration-underline tcp-1">
                                 ثبت نام
+                            </a>
+                        </p>
+                        <p class="tcn-4 text-center mt-lg-10 mt-6">رمز خود را فراموش کردید؟
+                            <a href="{% url 'Forgot' %}" class="text-decoration-underline tcp-1">
+                                بازیابی کلمه عبور
                             </a>
                         </p>
                     </div>
