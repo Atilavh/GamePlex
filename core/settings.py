@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     # Internal apps
     'Home.apps.HomeConfig',
     'accounts_module.apps.AccountsModuleConfig',
-    'Competitions.apps.CompetitionsConfig',
     'Teams.apps.TeamsConfig',
+    'Tournaments.apps.TournamentsConfig',
     # External apps
     'django_render_partial',
 ]
@@ -77,7 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-AUTH_USER_MODEL = 'accounts_module.Registration'
+AUTH_USER_MODEL = 'accounts_module.user'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-IR'
 
 TIME_ZONE = 'UTC'
 
@@ -128,6 +128,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static_files',
 ]
+
+MEDIA_ROOT = BASE_DIR / 'uploads'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
