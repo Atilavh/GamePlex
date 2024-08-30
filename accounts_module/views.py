@@ -1,13 +1,12 @@
 from audioop import reverse
-
 from django.contrib.auth import login, logout
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.crypto import get_random_string
 from django.views import View
 from django.http import HttpResponse
-from accounts_module.forms import sing_up_form, login_form
-from .models import Registration
+from accounts_module.forms import sing_up_form, login_form, forgotten_form
+from accounts_module.models import User
 
 
 # Create your views here.
@@ -20,11 +19,11 @@ def register_page(request):
         user_phone = register_form.cleaned_data.get('phone')
         user_email = register_form.cleaned_data.get('email')
         user_password = register_form.cleaned_data.get('password')
-        user: bool = Registration.objects.filter(email__iexact=user_email).exists()
+        user: bool = User.objects.filter(email__iexact=user_email).exists()
         if user:
             register_form.add_error('email', 'این ایمیل قبلا ثبت نام کرده')
         else:
-            new_user = Registration(
+            new_user = User(
                 full_name=user_fullname,
                 username=user_name,
                 phone_number=user_phone,
@@ -42,7 +41,7 @@ def register_page(request):
 
 
 # def activate_page(request, email_code):
-#     user: Registration = Registration.objects.filter(email_active_code__iexact=email_code).first()
+#     user: User = User.objects.filter(email_active_code__iexact=email_code).first()
 #     if user is not None:
 #         if not user.is_active:
 #             user.is_active = True
@@ -55,7 +54,7 @@ def register_page(request):
 
 class ActivateAccountView(View):
     def get(self, request, email_code):
-        user = Registration.objects.filter(email_active_code__iexact=email_code).first()
+        user = User.objects.filter(email_active_code__iexact=email_code).first()
         if user is not None:
             if not user.is_active:
                 user.is_active = True
@@ -74,7 +73,7 @@ def login_page(request):
     if Login.is_valid():
         user_email = Login.cleaned_data.get('email')
         user_password = Login.cleaned_data.get('password')
-        user: Registration = Registration.objects.filter(email__iexact=user_email).first()
+        user: User = User.objects.filter(email__iexact=user_email).first()
         if user is not None:
             if not user.is_active:
                 Login.add_error('email', 'کاربری با مشخصات وارد شده یافت نشد')
@@ -92,6 +91,17 @@ def login_page(request):
         'login_form': Login,
     }
     return render(request, 'sing_in/Login.html', context)
+
+
+def forgot_password_page(request):
+    forgot_page = forgotten_form(request.POST)
+    if forgot_page.is_valid():
+        user_email = forgot_page.cleaned_data.get('email')
+        user: User = User.objects.filter(email__iexact=user_email).first()
+        if user is not None:
+            return redirect('home_page')
+    context = {'forgot_form': forgot_page}
+    return render(request, 'forgot_password/forgot_page.html', context)
 
 
 def logout_page(request):
