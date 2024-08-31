@@ -6,7 +6,6 @@ class sing_up_form(forms.Form):
         max_length=20,
         widget=forms.TextInput(
             attrs={
-                'color': 'white',
                 'placeholder': 'نام خود را وارد کنید',
                 'class': 'single-input mb-6'
             }))
@@ -60,9 +59,6 @@ class login_form(forms.Form):
 
 class forgotten_form(forms.Form):
     email = forms.EmailField(
-        # max_length=50,
-        # required=True,
-        # error_messages='بعضی از فیلد ها پر نشدند',
         widget=forms.EmailInput(
             attrs={
                 'placeholder': 'ایمیل خود را وارد کنید',
