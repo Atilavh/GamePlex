@@ -21,9 +21,9 @@ class Tournament(models.Model):
     title = models.CharField(max_length=50, verbose_name='عنوان تورنومنت')
     mode = models.CharField(max_length=15, verbose_name='حالت بازی')
     prize = models.IntegerField(verbose_name='مقدار جایزه')
-    date = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ تورنومنت')
+    date = models.DateTimeField(verbose_name='تاریخ تورنومنت')
     ticketamount = models.IntegerField(verbose_name='هزینه ورودی')
-    image = models.ImageField(upload_to='tournaments_image', verbose_name='عکس تورنومنت')
+    image = models.ImageField(upload_to='images', verbose_name='عکس تورنومنت')
     slug = models.SlugField(default="", null=False, db_index=True, blank=True, max_length=200, unique=True,
                             verbose_name='عنوان در url', editable=True)
     category = models.ManyToManyField(Category, related_name='tournament_categories', verbose_name='دسته بندی ها')
@@ -39,7 +39,3 @@ class Tournament(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class Upload(models.Model):
-    image = models.FileField(upload_to='images')
