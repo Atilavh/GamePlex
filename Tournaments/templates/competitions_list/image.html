@@ -6,9 +6,9 @@
 
 {% block content %}
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<form action="{% url 'image' %}" method="post" class="sign-in-form">
+	<form action="{% url 'upload' %}" method="post" class="sign-in-form" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ image.profile }}
+        {{ upload.Image }}
         <div class="text-center">
             <button class="bttn py-3 px-6 rounded bgp-1">ثبت</button>
         </div>
