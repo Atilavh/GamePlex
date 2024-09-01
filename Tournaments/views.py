@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
 from Tournaments.models import Tournament
 from Tournaments.forms import Profile
+from jalali_date import datetime2jalali, date2jalali
 
 
 # Create your views here.
 
 def tournament_list(request):
     tournaments = Tournament.objects.filter(is_active=True)
+    # solar_date = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
     context = {
-        'tournaments': tournaments
+        'tournaments': tournaments,
+        # 'date': solar_date
     }
     return render(request, 'competitions_list/competitions_list.html', context)
 
