@@ -1,5 +1,6 @@
 {% extends 'shared/_layout.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block title %}
     مسابقات
@@ -46,8 +47,11 @@
                                     <div class="tournament-card p-xl-4 p-3 pb-xl-8 bgn-4">
                                         <div class="tournament-img mb-8 position-relative">
                                             <div class="img-area overflow-hidden">
-                                                <img class="w-100" src="{{ tournament.image.url }}"
+
+                                                {% thumbnail tournament.image "324x432" quality=95 crop='center' as im %}
+                                                       <img class="w-100" src="{{ im.url }}"
                                                      alt="مسابقات">
+                                                {% endthumbnail %}
                                             </div>
                                             <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
                                                 <span class="dot-icon alt-icon pe-3">تورنومنت
