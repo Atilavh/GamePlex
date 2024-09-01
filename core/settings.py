@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'Tournaments.apps.TournamentsConfig',
     # External apps
     'django_render_partial',
-    ''
+    'sorl.thumbnail',
+    'jalali_date'
 ]
 
 MIDDLEWARE = [
