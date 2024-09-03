@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from Tournaments.models import Tournament
 from Tournaments.forms import Profile
@@ -27,3 +28,11 @@ def tournament_image_save(request):
     return render(request, 'competitions_list/image.html', {
         'upload': image_of_tournament
     })
+
+
+def paging(request):
+    query = Tournament.objects.all()
+    page = Paginator(query, 1)
+    req = request.GET.get('page')
+    page_obj = page.get_page(req)
+    return render(request, 'competitions_list/competitions_list.html', {'page_obj': page_obj})
