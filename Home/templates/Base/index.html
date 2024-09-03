@@ -1,5 +1,7 @@
 {% extends 'shared/_layout.html' %}
 {% load static %}
+{% load thumbnail %}
+
 
 {% block content %}
     <!-- Preloader -->
@@ -108,20 +110,9 @@
                 <h3 class="tcn-1 cursor-scale growDown title-anim mb-lg-20 mb-sm-10 mb-6">کیف پول خود را وصل کنید</h3>
                 <div class="wallet-option pb-20">
                     <ul class="d-grid gap-sm-8 gap-4">
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>اتصال با متامسک</span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="{% static 'img/metamask.png' %}" alt="متامسک">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4">
-                            <a href="#" class="d-between">
-                                <span>اتصال با والت کانکت</span>
-                                <div class="wallet-item-thumb">
-                                    <img class="w-100" src="{% static 'img/walletconnect.png' %}" alt="والت کانکت">
-                                </div>
+                        <li class="wallet-item p-sm-6 p-2 bgn-3 rounded-4 justify-content-center">
+                            <a href="{% url 'tournament_list' %}" class="btn-half-border position-relative py-2 px-6 bgp-1 rounded-pill mfp-iframe">
+                                متصل کردن به کیف پول
                             </a>
                         </li>
                     </ul>
@@ -188,8 +179,8 @@
                             <span class="d-block tcp-1">بازیکنانــ</span>
                             بازماندهـ
                         </h1>
-                        <a href="https://www.youtube.com/watch?v=G5kzUpWAusI"
-                           class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill popupvideo mfp-iframe">الان
+                        <a href="{% url 'tournament_list' %}"
+                           class="btn-half-border position-relative d-inline-block py-2 px-6 bgp-1 rounded-pill mfp-iframe">الان
                             بازی کن</a>
                     </div>
                 </div>
@@ -309,384 +300,36 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
+                    {% for objects in obj %}
+                        <div class="swiper-slide">
+                            <div class="card-3d d-grid justify-content-center p-3">
+                                <div class="img-area w-100 mb-8 position-relative">
                                 <span
                                         class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 15.02.2022</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-1.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
+                                    <i class="ti ti-calendar-due"></i>{{ objects.date }}</span>
+                                    {% thumbnail objects.image "294x294" quality=95 crop='center' as im %}
+                                        <img class="w-100" src="{{ im.url }}" alt="بازی">
+                                    {% endthumbnail %}
+                                    <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
+                                    <a href="shod.ir"><span class="dot-icon alt-icon pe-3">بازی کردن</span></a>
                                 </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">هومیز</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
+                                </div>
+                                <h5 class="card-title text-center tcn-1 mb-4 title-anim">{{ objects.title }}</h5>
+                                <div class="d-center">
+                                    <div class="card-info d-center gap-3 py-1 px-3">
+                                        <div class="v-line"></div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <img src="{% static 'img/Prize-removebg-preview.png' %}" alt="جابزه"
+                                                 style="display: block; width: 10%; height: 10%;">
+                                            <span class="tcn-1 fs-xs">مقدار جایزه مسابقه {{ objects.prize }}ت</span>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-2.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">ماینکرفت</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-3.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">دی دی نت</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-4.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">کانتر 1.6</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-5.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">کال اف دیوتی</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-6.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">مبارزه در خلیج عدن</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-7.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">لایت رسپانس</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-1.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">زولا</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-2.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">جویسی کات</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-3.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">سفیر عشق</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-4.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">مختار</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-5.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">ویدل</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-6.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">شاهزاده پارسی</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="card-3d d-grid justify-content-center p-3">
-                            <div class="img-area w-100 mb-8 position-relative">
-                                <span
-                                        class="card-date position-absolute top-0 start-0 py-2 px-3 mt-4 ms-5 tcn-1 d-flex align-items-center gap-1 fs-sm">
-                                    <i class="ti ti-calendar-due"></i> 1402.12.12</span>
-                                <img class="w-100" src="{% static 'img/slide-3d-7.png' %}" alt="بازی">
-                                <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                    <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                </span>
-                            </div>
-                            <h5 class="card-title text-center tcn-1 mb-4 title-anim">تراوین</h5>
-                            <div class="d-center">
-                                <div class="card-info d-center gap-3 py-1 px-3">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                        <span class="tcn-1 fs-xs">75</span>
-                                    </div>
-                                    <div class="v-line"></div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                        <span class="tcn-1 fs-xs">$49.97</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                 </div>
             </div>
             <div class="swiper-btn-area d-center gap-6">
@@ -728,298 +371,52 @@
                 <div class="col">
                     <div class="swiper swiper-top-player">
                         <div class="swiper-wrapper my-1">
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle"
-                                                     src="{% static 'img/top-player1.png' %}"
-                                                     alt="بازیکن">
-                                                <span
-                                                        class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">1</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">آیدین امینی</h5>
-                                                <span class="tcn-6 fs-sm">نبرد کننده</span>
+                            {% for user in users %}
+                                <div class="swiper-slide">
+                                    <div class="player-card d-grid gap-6 p-6 card-tilt">
+                                        <div class="player-info-area d-between w-100">
+                                            <div class="player-info d-flex align-items-center gap-4">
+                                                <div class="player-img position-relative">
+                                                    <img class="w-100 rounded-circle"
+                                                         src="{% static 'img/top-player1.png' %}"
+                                                         alt="بازیکن">
+                                                    <span
+                                                            class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">1</span>
+                                                </div>
+                                                <div>
+                                                    <h5 class="player-name tcn-1 mb-1 title-anim">{{ user.full_name }}</h5>
+                                                    <span class="tcn-6 fs-sm">نبرد کننده</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
-                                            <span class="tcn-1 fs-sm">
+                                        <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
+                                            <div class="score">
+                                                <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
+                                                <ul class="d-flex align-items-center gap-1 tcp-2">
+                                                    <li><i class="ti ti-star-filled"></i></li>
+                                                    <li><i class="ti ti-star-filled"></i></li>
+                                                    <li><i class="ti ti-star-filled"></i></li>
+                                                    <li><i class="ti ti-star-filled"></i></li>
+                                                    <li><i class="ti ti-star-filled"></i></li>
+                                                </ul>
+                                            </div>
+                                            <div class="rank">
+                                                <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
+                                                <span class="tcn-1 fs-sm">
                                                 <i class="ti ti-diamond"></i> افسانه ای</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">منطقه</h6>
-                                            <span class="tcn-1 fs-sm">ایران</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">تیم</h6>
-                                            <span class="tcs-1 fs-sm">انوش</span>
+                                            </div>
+                                            <div class="region">
+                                                <h6 class="region-title tcn-6 mb-2">منطقه</h6>
+                                                <span class="tcn-1 fs-sm">ایران</span>
+                                            </div>
+                                            <div class="team">
+                                                <h6 class="team-title tcn-6 mb-2">تیم</h6>
+                                                <span class="tcs-1 fs-sm">انوش</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle"
-                                                     src="{% static 'img/top-player2.png' %}"
-                                                     alt="بازیکن">
-                                                <span
-                                                        class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">2</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">میلاد اسکندری</h5>
-                                                <span class="tcn-6 fs-sm">نبرد کننده</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> حرفه ای</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">منطقه</h6>
-                                            <span class="tcn-1 fs-sm">ایران</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">تیم</h6>
-                                            <span class="tcs-1 fs-sm">چمروش</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle"
-                                                     src="{% static 'img/top-player3.png' %}"
-                                                     alt="بازیکن">
-                                                <span
-                                                        class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">3</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">آرمیس نیک سرشت</h5>
-                                                <span class="tcn-6 fs-sm">نبرد کننده</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> قهرمان</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">منطقه</h6>
-                                            <span class="tcn-1 fs-sm">ایران</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">تیم</h6>
-                                            <span class="tcs-1 fs-sm">کیکاووس</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="{% static 'img/player1.png' %}"
-                                                     alt="بازیکن">
-                                                <span
-                                                        class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">1</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">کمال هدایت بخش</h5>
-                                                <span class="tcn-6 fs-sm">نبرد کننده</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> افسانه ای</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">منطقه</h6>
-                                            <span class="tcn-1 fs-sm">ایران</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">تیم</h6>
-                                            <span class="tcs-1 fs-sm">رخش</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle" src="{% static 'img/player2.png' %}"
-                                                     alt="بازیکن">
-                                                <span
-                                                        class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">2</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">بهزاد خسروی</h5>
-                                                <span class="tcn-6 fs-sm">نبرد کننده</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> حرفه ای</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">منطقه</h6>
-                                            <span class="tcn-1 fs-sm">ایران</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">تیم</h6>
-                                            <span class="tcs-1 fs-sm">سیمرغ</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="player-card d-grid gap-6 p-6 card-tilt" data-tilt>
-                                    <div class="player-info-area d-between w-100">
-                                        <div class="player-info d-flex align-items-center gap-4">
-                                            <div class="player-img position-relative">
-                                                <img class="w-100 rounded-circle"
-                                                     src="{% static 'img/top-player3.png' %}"
-                                                     alt="بازیکن">
-                                                <span
-                                                        class="player-status position-absolute start-0 bottom-0 tcn-1 fs-xs d-center">3</span>
-                                            </div>
-                                            <div>
-                                                <h5 class="player-name tcn-1 mb-1 title-anim">هاکان اسلامی</h5>
-                                                <span class="tcn-6 fs-sm">نبرد کننده</span>
-                                            </div>
-                                        </div>
-                                        <form action="#">
-                                            <button class="follow-btn box-style">
-                                                <i class="ti ti-user-plus fs-xl"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div class="player-score-details d-flex align-items-center flex-wrap gap-3">
-                                        <div class="score">
-                                            <h6 class="score-title tcn-6 mb-2">امتیاز</h6>
-                                            <ul class="d-flex align-items-center gap-1 tcp-2">
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star-filled"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                                <li><i class="ti ti-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="rank">
-                                            <h6 class="rank-title tcn-6 mb-2">رتبه</h6>
-                                            <span class="tcn-1 fs-sm">
-                                                <i class="ti ti-diamond"></i> قهرمان</span>
-                                        </div>
-                                        <div class="region">
-                                            <h6 class="region-title tcn-6 mb-2">منطقه</h6>
-                                            <span class="tcn-1 fs-sm">ایران</span>
-                                        </div>
-                                        <div class="team">
-                                            <h6 class="team-title tcn-6 mb-2">تیم</h6>
-                                            <span class="tcs-1 fs-sm">مزدافر</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -1053,183 +450,68 @@
                         </div>
                     </div>
                     <div class="row justify-content-between align-items-center g-6">
-                        <div class="col-xl-4 col-md-6">
-                            <div class="tournament-card p-xl-4 p-3 bgn-4">
-                                <div class="tournament-img mb-8 position-relative">
-                                    <div class="img-area overflow-hidden">
-                                        <img class="w-100" src="{% static 'img/tournament1.png' %}" alt="مسابقات">
-                                    </div>
-                                    <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="dot-icon alt-icon pe-3">بازی کردن</span>
+                        {% for tournaments in obj %}
+                            <div class="col-xl-4 col-md-6">
+                                <div class="tournament-card p-xl-4 p-3 bgn-4">
+                                    <div class="tournament-img mb-8 position-relative">
+                                        <div class="img-area overflow-hidden">
+                                            {% thumbnail tournaments.image "294x294" quality=95 crop='center' as im %}
+                                                <img class="w-100" src="{{ im.url }}" alt="مسابقات">
+                                            {% endthumbnail %}
+                                        </div>
+                                        <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
+                                        <a href="http://google.com"><span
+                                                class="dot-icon alt-icon pe-3">بازی کردن</span></a>
                                     </span>
-                                </div>
-                                <div class="tournament-content px-xl-4 px-sm-2">
-                                    <div class="tournament-info mb-5">
-                                        <a href="tournaments-details.html" class="d-block">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                میدان جنگ آرشیدا</h4>
-                                        </a>
-                                        <span class="tcn-6 fs-sm">مسابقات انفرادی</span>
                                     </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                                <span class="tcn-1 fs-sm">75</span>
-                                            </div>
-                                            <div class="v-line"></div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
-                                            </div>
+                                    <div class="tournament-content px-xl-4 px-sm-2">
+                                        <div class="tournament-info mb-5">
+                                            <a href="tournaments-details.html" class="d-block">
+                                                <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
+                                                    {{ tournaments.title }}</h4>
+                                            </a>
+                                            <span class="tcn-6 fs-sm">{{ tournaments.mode }}</span>
                                         </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">ورود رایگان</span>
-                                        </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span class="tcn-1 fs-sm">۷ دی، ۰۵:۳۰ ق.ظ</span>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-more-info d-between mt-6">
-                                        <div class="teams-info d-between gap-xl-5 gap-3">
-                                            <div class="teams d-flex align-items-center gap-1">
-                                                <i class="ti ti-users fs-base"></i>
-                                                <span class="tcn-6 fs-sm">12/12 تیم</span>
+                                        <div class="hr-line line3"></div>
+                                        <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
+                                            <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
+                                                <div class="v-line"></div>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <img src="{% static 'img/Prize-removebg-preview.png' %}" alt="تتر"
+                                                         style="display: block; width: 10%; height: 10%;">
+                                                    <span class="tcn-1 fs-sm">{{ tournaments.prize }}</span>
+                                                    <p>(جایزه تورنومنت در صورت برد)</p>
+                                                </div>
                                             </div>
-                                            <div class="player d-flex align-items-center gap-1">
-                                                <i class="ti ti-user fs-base"></i>
-                                                <span class="tcn-6 fs-sm">128 بازیکن</span>
+                                            <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                <i class="ti ti-ticket fs-base tcp-2"></i>
+                                                <span class="tcn-1 fs-sm">{{ tournaments.ticketamount }}</span>
+                                            </div>
+                                            <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
+                                                <i class="ti ti-calendar fs-base tcn-1"></i>
+                                                <span class="tcn-1 fs-sm">{{ tournaments.date }}</span>
                                             </div>
                                         </div>
-                                        <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-left fs-2xl"></i>
-                                        </a>
+                                        <div class="hr-line line3"></div>
+                                        <div class="card-more-info d-between mt-6">
+                                            <div class="teams-info d-between gap-xl-5 gap-3">
+                                                <div class="teams d-flex align-items-center gap-1">
+                                                    <i class="ti ti-users fs-base"></i>
+                                                    <span class="tcn-6 fs-sm">12/12 تیم</span>
+                                                </div>
+                                                <div class="player d-flex align-items-center gap-1">
+                                                    <i class="ti ti-user fs-base"></i>
+                                                    <span class="tcn-6 fs-sm">128 بازیکن</span>
+                                                </div>
+                                            </div>
+                                            <a href="tournaments-details.html" class="btn2">
+                                                <i class="ti ti-arrow-left fs-2xl"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="tournament-card p-xl-4 p-3 bgn-4">
-                                <div class="tournament-img mb-8 position-relative">
-                                    <div class="img-area overflow-hidden">
-                                        <img class="w-100" src="{% static 'img/tournament2.png' %}" alt="مسابقات">
-                                    </div>
-                                    <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                    </span>
-                                </div>
-                                <div class="tournament-content px-xl-4 px-sm-2">
-                                    <div class="tournament-info mb-5">
-                                        <a href="tournaments-details.html" class="d-block">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                میدان جنگ آرمیتا</h4>
-                                        </a>
-                                        <span class="tcn-6 fs-sm">مسابقات انفرادی</span>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                                <span class="tcn-1 fs-sm">75</span>
-                                            </div>
-                                            <div class="v-line"></div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
-                                            </div>
-                                        </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">ورود رایگان</span>
-                                        </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span class="tcn-1 fs-sm">۷ دی، ۰۵:۳۰ ق.ظ</span>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-more-info d-between mt-6">
-                                        <div class="teams-info d-between gap-xl-5 gap-3">
-                                            <div class="teams d-flex align-items-center gap-1">
-                                                <i class="ti ti-users fs-base"></i>
-                                                <span class="tcn-6 fs-sm">12/12 تیم</span>
-                                            </div>
-                                            <div class="player d-flex align-items-center gap-1">
-                                                <i class="ti ti-user fs-base"></i>
-                                                <span class="tcn-6 fs-sm">128 بازیکن</span>
-                                            </div>
-                                        </div>
-                                        <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-left fs-2xl"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="tournament-card p-xl-4 p-3 bgn-4">
-                                <div class="tournament-img mb-8 position-relative">
-                                    <div class="img-area overflow-hidden">
-                                        <img class="w-100" src="{% static 'img/tournament3.png' %}" alt="مسابقات">
-                                    </div>
-                                    <span class="card-status position-absolute end-0 py-2 px-6 tcn-1 fs-sm">
-                                        <span class="dot-icon alt-icon pe-3">بازی کردن</span>
-                                    </span>
-                                </div>
-                                <div class="tournament-content px-xl-4 px-sm-2">
-                                    <div class="tournament-info mb-5">
-                                        <a href="tournaments-details.html" class="d-block">
-                                            <h4 class="tournament-title tcn-1 mb-1 cursor-scale growDown title-anim">
-                                                میدان جنگ آروید</h4>
-                                        </a>
-                                        <span class="tcn-6 fs-sm">مسابقات انفرادی</span>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-info d-flex align-items-center gap-3 flex-wrap my-5">
-                                        <div class="price-money bgn-3 d-flex align-items-center gap-3 py-2 px-3 h-100">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="{% static 'img/bitcoin.png' %}" alt="بیت کوین">
-                                                <span class="tcn-1 fs-sm">75</span>
-                                            </div>
-                                            <div class="v-line"></div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <img class="w-100" src="{% static 'img/tether.png' %}" alt="تتر">
-                                                <span class="tcn-1 fs-sm">$49.97</span>
-                                            </div>
-                                        </div>
-                                        <div class="ticket-fee bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-ticket fs-base tcp-2"></i>
-                                            <span class="tcn-1 fs-sm">ورود رایگان</span>
-                                        </div>
-                                        <div class="date-time bgn-3 d-flex align-items-center gap-1 py-2 px-3 h-100">
-                                            <i class="ti ti-calendar fs-base tcn-1"></i>
-                                            <span class="tcn-1 fs-sm">۷ دی، ۰۵:۳۰ ق.ظ</span>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line line3"></div>
-                                    <div class="card-more-info d-between mt-6">
-                                        <div class="teams-info d-between gap-xl-5 gap-3">
-                                            <div class="teams d-flex align-items-center gap-1">
-                                                <i class="ti ti-users fs-base"></i>
-                                                <span class="tcn-6 fs-sm">12/12 تیم</span>
-                                            </div>
-                                            <div class="player d-flex align-items-center gap-1">
-                                                <i class="ti ti-user fs-base"></i>
-                                                <span class="tcn-6 fs-sm">128 بازیکن</span>
-                                            </div>
-                                        </div>
-                                        <a href="tournaments-details.html" class="btn2">
-                                            <i class="ti ti-arrow-left fs-2xl"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

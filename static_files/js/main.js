@@ -137,7 +137,6 @@ $(document).ready(() => {
   // 11 -> 3D swiper effect
   var swiper3D = new Swiper('.swiper-3d-container', {
     slidesPerView: 'auto',
-    loop: true,
     centeredSlides: true,
     speed: 1000,
     freeMode: true,
@@ -175,7 +174,6 @@ $(document).ready(() => {
   // 12 -> top player slider
   var topPlayerSwiper = new Swiper('.swiper-top-player', {
     slidesPerView: "auto",
-    loop: true,
     centeredSlides: true,
     spaceBetween: 24,
     freeMode: true,
