@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from Tournaments.models import Tournament
+from accounts_module.models import User
 
 
 # Create your views here.
@@ -10,19 +12,15 @@ def header_component(request):
 
 # Home-Page-->
 def home_page(request):
-    return render(request, 'Base/index.html')
+    user_query = User.objects.filter(is_active=True)
+    query = Tournament.objects.filter(is_active=True)
+    context = {
+        'obj': query,
+        'users': user_query,
+    }
+    return render(request, 'Base/index.html', context)
 
 
 # Footer-Render-Partial-->
 def footer_component(request):
     return render(request, 'footer_component/footer_partial.html')
-
-# def pageing(request):
-#     query = Registration.objects.all()
-#     page = Paginator(query, 3)
-#     req = request.GET.get('page', 1)
-#     page_obj = page.page(req)
-#     context = {
-#         'page_obj': page_obj,
-#     }
-#     return render(request, '', context)
