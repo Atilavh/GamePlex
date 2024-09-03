@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from accounts_module.models import User
 
 
 class Category(models.Model):
@@ -24,11 +25,33 @@ class Tournament(models.Model):
     date = models.DateTimeField(verbose_name='تاریخ تورنومنت')
     ticketamount = models.IntegerField(verbose_name='هزینه ورودی')
     image = models.ImageField(upload_to='images', verbose_name='عکس تورنومنت')
-    slug = models.SlugField(default="", null=False, db_index=True, blank=True, max_length=200, unique=True,
-                            verbose_name='عنوان در url', editable=True)
-    category = models.ManyToManyField(Category, related_name='tournament_categories', verbose_name='دسته بندی ها')
     is_active = models.BooleanField(verbose_name='فعال شده / نشده')
     is_delete = models.BooleanField(verbose_name='حذف شده / نشده')
+    slug = models.SlugField(
+        default="",
+        null=False,
+        db_index=True,
+        blank=True,
+        max_length=200,
+        unique=True,
+        verbose_name='عنوان در url',
+        editable=True
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='tournament_categories',
+        verbose_name='دسته بندی ها',
+        null=True,
+        blank=True
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='یوزر برنده',
+        null=True,
+        blank=True
+    )
 
     def get_absolute_url(self):
         return reverse('tournament_detail', args=[self.slug])
